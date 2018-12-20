@@ -1,0 +1,54 @@
+/* pages/fenlei/index.wxss */
+.body{background-color: #f5f5f5;
+width: 100%;
+left: 0px;
+height: 100%;
+top: 0px;
+z-index: -1;
+position: absolute;
+font-size: 14px;
+font-family: songti;}
+::-webkit-scrollbar{
+width: 0;
+height: 0;
+color: transparent;
+}
+.top{height:100rpx;
+float:left;
+width:100%;
+line-height:100rpx;
+text-align:center;
+background-color:#5fc391;
+font-size:40rpx;
+color:#aceaca;
+}
+.top view{
+  display:inline-block;
+padding:0px 20px;
+letter-spacing:2px;
+}
+.choose{font-weight:bold;
+color:#fff;}
+.bankuai{float:left;
+background-color:#fff;
+width:100%;
+margin-top:10rpx;
+}
+.left text{color:#abadb3;
+}
+.left{display: table-cell;
+text-align:center;
+width:30%;
+vertical-align:middle;
+}
+.right{display: table-cell;
+width: 70%;
+}
+.right text{display:inline-block;
+border:1px solid #efefef;
+width:260rpx;
+text-align:center;
+line-height: 40px;
+margin-bottom:-1px;
+margin-right:-1px;
+}

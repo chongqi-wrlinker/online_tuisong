@@ -1,0 +1,36 @@
+<view class='body'>
+  <view class='hezi'>
+    <view class='header'>
+      <text class='mulu'>目录设置：</text>
+      <text class='zushi'>点选下列目录保存为自己喜欢的目录</text>
+    </view>
+    <view class='bankuai' wx:for="{{list}}" wx:key="{{index}}">
+      <view class='left'>
+        <text>{{item.name}}</text>
+      </view>
+      <view class='right'>
+        <checkbox-group bindchange="checkboxChange">
+          <label class="checkbox" wx:for="{{item.count}}"  wx:key="{{indexs}}">
+              <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.levename}}
+          </label>
+      </checkbox-group>
+      </view>
+    </view>
+  </view>
+  <view class='hezi'>
+    <view class='header'>
+      <text class='mulu'>关键词设置：</text>
+      <text class='zushi'>点选下列关键词保存为自己喜欢的关键词</text>
+    </view>
+    <view class='gjlieb'>
+      <checkbox-group bindchange="checkboxChange">
+          <label class="checkbox" wx:for-items="{{itemss}}" wx:key="{{index}}">
+              <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+          </label>
+      </checkbox-group>
+    </view>
+  </view>
+  <view class='an'>
+    <button class='button'>保存设置</button>
+  </view>
+</view>

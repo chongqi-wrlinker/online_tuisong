@@ -1,0 +1,8 @@
+<view class="body">
+  <view class='top'>
+    <view bindtap='tuijian'>推荐</view>
+    <view class='choose'>分类</view>
+    <view bindtap='wode'>我的</view>
+  </view>
+  
+</view>

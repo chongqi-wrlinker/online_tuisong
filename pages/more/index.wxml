@@ -1,0 +1,134 @@
+<view class='main'>
+  <view class='lieb'>
+        <image src='/image/baike.png' class='tup'></image>
+        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='liulan'>
+          <view>
+            <image src='/image/shouc.gif'></image>
+            <text>66</text>
+          </view>
+          <view>
+            <image src='/image/yan.gif'></image>
+            <text>66</text>
+          </view>
+        </view>
+        <view class='guanjianci'>
+            <text bindtap='click'>唐诗</text>
+            <text bindtap='click'>三生三世</text>
+        </view>
+        <view class='sanh'>
+          <view class='lei'>科学百科</view>
+          <view class='times'>2018-10-26</view>
+        </view>
+      </view>
+      <view class='lieb'>
+        <image src='/image/toutu.gif' class='tup'></image>
+        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='liulan'>
+          <view>
+            <image src='/image/shouc.gif'></image>
+            <text>66</text>
+          </view>
+          <view>
+            <image src='/image/yan.gif'></image>
+            <text>66</text>
+          </view>
+        </view>
+        <view class='guanjianci'>
+            <text bindtap='click'>唐诗</text>
+            <text bindtap='click'>三生三世</text>
+        </view>
+        <view class='sanh'>
+          <view class='lei'>类别</view>
+          <view class='times'>2018-10-26</view>
+        </view>
+      </view>
+      <view class='lieb'>
+        <image src='/image/baike.png' class='tup'></image>
+        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='liulan'>
+          <view>
+            <image src='/image/shouc.gif'></image>
+            <text>66</text>
+          </view>
+          <view>
+            <image src='/image/yan.gif'></image>
+            <text>66</text>
+          </view>
+        </view>
+        <view class='guanjianci'>
+            <text bindtap='click'>唐诗</text>
+            <text bindtap='click'>三生三世</text>
+        </view>
+        <view class='sanh'>
+          <view class='lei'>科学百科</view>
+          <view class='times'>2018-10-26</view>
+        </view>
+      </view>
+      <view class='lieb'>
+        <image src='/image/toutu.gif' class='tup'></image>
+        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='liulan'>
+          <view>
+            <image src='/image/shouc.gif'></image>
+            <text>66</text>
+          </view>
+          <view>
+            <image src='/image/yan.gif'></image>
+            <text>66</text>
+          </view>
+        </view>
+        <view class='guanjianci'>
+            <text bindtap='click'>唐诗</text>
+            <text bindtap='click'>三生三世</text>
+        </view>
+        <view class='sanh'>
+          <view class='lei'>类别</view>
+          <view class='times'>2018-10-26</view>
+        </view>
+      </view>
+      <view class='lieb'>
+        <image src='/image/baike.png' class='tup'></image>
+        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='liulan'>
+          <view>
+            <image src='/image/shouc.gif'></image>
+            <text>66</text>
+          </view>
+          <view>
+            <image src='/image/yan.gif'></image>
+            <text>66</text>
+          </view>
+        </view>
+        <view class='guanjianci'>
+            <text bindtap='click'>唐诗</text>
+            <text bindtap='click'>三生三世</text>
+        </view>
+        <view class='sanh'>
+          <view class='lei'>科学百科</view>
+          <view class='times'>2018-10-26</view>
+        </view>
+      </view>
+      <view class='lieb'>
+        <image src='/image/toutu.gif' class='tup'></image>
+        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='liulan'>
+          <view>
+            <image src='/image/shouc.gif'></image>
+            <text>66</text>
+          </view>
+          <view>
+            <image src='/image/yan.gif'></image>
+            <text>66</text>
+          </view>
+        </view>
+        <view class='guanjianci'>
+            <text bindtap='click'>唐诗</text>
+            <text bindtap='click'>三生三世</text>
+        </view>
+        <view class='sanh'>
+          <view class='lei'>类别</view>
+          <view class='times'>2018-10-26</view>
+        </view>
+      </view>
+</view>

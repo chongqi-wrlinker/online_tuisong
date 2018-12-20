@@ -1,0 +1,57 @@
+/* pages/lishi/index.wxss */
+.lieb{float:left;
+width:100%;
+padding-bottom:5px;
+border-bottom:1px solid #efefef;
+}
+.tup{height:190rpx;
+border-radius:5px;
+margin-left:10px;
+margin-top:5px;
+float:left;
+width:260rpx;
+border:1px solid #efefef;
+}
+.titles{float:left;
+margin-left:8px;
+margin-top:5px;
+width:58%;
+color:#7a7a7a;
+font-weight:bold;
+font-size:15px;
+}
+.liulan{float:left;
+width:58%;
+}
+.guanjianci{float: left; width: 58%; overflow: hidden;}
+.guanjianci text{color:#ff9103;
+padding-left:6px;
+padding-right:6px;
+font-size: 13px;
+}
+.liulan view{float:left;
+margin-left:5px;
+margin-right:15px;
+margin-top:5px;
+}
+.liulan image{width:43rpx;
+height:40rpx;
+margin-right:5px;
+}
+.liulan text{color:#bfbfbf;
+font-size:13px;
+}
+.lei{float:left;
+width:40%;
+margin-left:5px;
+color:#bfbfbf;
+}
+.times{float:right;
+text-align:right;
+padding-right:5px;
+color:#bfbfbf;
+}
+.sanh{float:left;
+width:58%;
+font-size:13px;
+}

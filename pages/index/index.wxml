@@ -1,0 +1,286 @@
+<view class="body">
+  <view class='top'>
+    <view class="{{tuijian?'choose':''}}" bindtap='tuijian'>推荐</view>
+    <view class="{{fenlei?'choose':''}}" bindtap='fenlei'>分类</view>
+    <view class="{{wode?'choose':''}}" bindtap='wode'>我的</view>
+  </view>
+  <view class="{{tuijian?'show':'hidden'}}">
+    <view class='lunbo'>
+      <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">  
+        <block wx:for="{{movies}}" wx:for-index="index">  
+          <swiper-item>  
+            <image src="{{item.url}}" class="slide-image" mode="aspectFill" style='height:150px; width:100%;'/>  
+          </swiper-item>  
+        </block>  
+      </swiper> 
+    </view>
+    <view class='bankuai'>
+      <view class='header'>
+        <image src='/image/jingdian.gif'></image>
+        <text>热门内容</text>
+        <view class='more' bindtap='more'>更多 〉</view>
+      </view>
+      <view class='mian'>
+        <view class='lieb'>
+          <image src='/image/shici.png' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>诗词歌赋</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+        <view class='lieb' bindtap='yuedu'>
+          <image src='/image/wenzhang.png' class='tup'></image>
+          <view class='titles'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>精彩文章</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+        <view class='lieb'>
+          <image src='/image/mingyan.png' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>名言警句</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='bankuai'>
+      <view class='header'>
+        <image src='/image/remen.gif'></image>
+        <text>经典推荐</text>
+        <view class='more'  bindtap='more'>更多 〉</view>
+      </view>
+      <view class='mian'>
+        <view class='lieb'>
+          <image src='/image/baike.png' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>科学百科</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+        <view class='lieb'>
+          <image src='/image/toutu.gif' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>类别</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+        <view class='lieb'>
+          <image src='/image/toutu.gif' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>类别</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--分类-->
+  <view class="{{fenlei?'show':'hidden'}}">
+    <view class='bankuai' wx:for="{{list}}" wx:key="{{index}}">
+      <view class='left'>
+        <text>{{item.name}}</text>
+      </view>
+      <view class='right'>
+        <text wx:for="{{item.count}}" wx:key="{{indexs}}" bindtap='click'>{{item.levename}}</text>
+      </view>
+    </view>
+  </view>
+  <!--我的-->
+  <view class="{{wode?'show':'hidden'}}">
+      <view class='headers'>
+      <view class='lefts' bindtap='lishi'><image src='/image/lishi.png' class='lishi'></image><text class='lishit'>历史记录</text></view>
+      <view class='rights' bindtap='shezhi'><image src='/image/shezhi.gif' class='aihao'></image><text class='aihaot'>爱好设置</text></view>
+    </view>
+    <view class='main'>
+      <view>
+        <text class='like'>我喜欢</text>
+      </view>
+      <view class='kong'>
+        <view class='box'><image src='/image/box.png'></image></view>
+        <text>您还没有添加喜欢的板块</text>
+        <button class='tianjia' bindtap='tianjia'>添加喜欢板块</button>
+      </view>
+      <view class='liebiao'>
+        <view class='lieb'>
+          <image src='/image/baike.png' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>科学百科</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+        <view class='lieb'>
+          <image src='/image/toutu.gif' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>类别</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+        <view class='lieb'>
+          <image src='/image/baike.png' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>科学百科</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+        <view class='lieb'>
+          <image src='/image/toutu.gif' class='tup'></image>
+          <view class='titles' bindtap='yuedu'>标题</view>
+          <view class='liulan'>
+            <view>
+              <image src='/image/shouc.gif'></image>
+              <text>66</text>
+            </view>
+            <view>
+              <image src='/image/yan.gif'></image>
+              <text>66</text>
+            </view>
+          </view>
+          <view class='guanjianci'>
+              <text bindtap='click'>唐诗</text>
+              <text bindtap='click'>三生三世</text>
+          </view>
+          <view class='sanh'>
+            <view class='lei'>类别</view>
+            <view class='times'>2018-10-26</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

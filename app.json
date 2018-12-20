@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/fenlei/index",
+    "pages/wode/index",
+    "pages/lishi/index",
+    "pages/more/index",
+    "pages/yuedu/index",
+    "pages/shezhi/index",
+    "pages/liebiao/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#3fb277",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "#3fb277"
+  }
+}

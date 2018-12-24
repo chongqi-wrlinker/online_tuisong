@@ -17,7 +17,7 @@
       </view>
     </view>
   </view>
-  <view class='hezi'>
+  <!--<view class='hezi'>
     <view class='header'>
       <text class='mulu'>关键词设置：</text>
       <text class='zushi'>点选下列关键词保存为自己喜欢的关键词</text>
@@ -29,7 +29,7 @@
           </label>
       </checkbox-group>
     </view>
-  </view>
+  </view>-->
   <view class='an'>
     <button class='button'>保存设置</button>
   </view>

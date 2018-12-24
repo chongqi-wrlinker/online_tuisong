@@ -19,6 +19,11 @@ Page({
       url: '/pages/yuedu/index',
     })
   },
+  xiangxi: function (e) {
+    wx.navigateTo({
+      url: '/pages/xiangxi/index',
+    })
+  },
   click: function (e) {
     wx.navigateTo({
       url: '/pages/liebiao/index',

@@ -37,8 +37,8 @@ font-size: 13px;
 margin-left:5px;
 margin-right: 5px;
 }
-.liulan image{width:35rpx;
-height:30rpx;
+.liulan image{width:40rpx;
+height:45rpx;
 margin-right:0px;
 vertical-align:middle;
 }

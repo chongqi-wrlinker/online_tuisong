@@ -11,9 +11,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
-	"appid": "wxf2f2daea0370ca0a",
-	"projectname": "online_test",
+	"libVersion": "2.4.1",
+	"appid": "wxdd501333918325d6",
+	"projectname": "%2Fhome%2Fmr-wang%2F%E5%B7%A5%E4%BD%9C%E9%A1%B9%E7%9B%AE%2F%E6%8E%A8%E9%80%81",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

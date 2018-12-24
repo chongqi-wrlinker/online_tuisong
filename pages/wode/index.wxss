@@ -88,7 +88,6 @@ font-size:18px;
 background-color:#fff;
 color:#848484;
 }
-/* pages/lishi/index.wxss */
 .lieb{float:left;
 width:100%;
 padding-bottom:5px;
@@ -113,7 +112,11 @@ font-size:15px;
 .liulan{float:left;
 width:58%;
 }
-.guanjianci{float: left; width: 58%; overflow: hidden;}
+.guanjianci{float:left;
+width:58%;
+overflow:hidden;
+margin-bottom:6px;
+}
 .guanjianci text{color:#ff9103;
 padding-left:6px;
 padding-right:6px;
@@ -121,12 +124,11 @@ font-size: 13px;
 }
 .liulan view{float:left;
 margin-left:5px;
-margin-right:15px;
-margin-top:5px;
 }
-.liulan image{width:43rpx;
-height:40rpx;
-margin-right:5px;
+.liulan image{width:35rpx;
+height:30rpx;
+margin-right:0px;
+vertical-align:middle;
 }
 .liulan text{color:#bfbfbf;
 font-size:13px;

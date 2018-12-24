@@ -1,0 +1,94 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="container" style="background:{{bodyColor}};">
+  <!-- 中间层，点击，头部底部显示 -->
+  <view class='topbiaoti'>铁血王爷捡到女军医</view>
+  <view class='ziliao'>
+    <view>
+      <text class='text1'>作者：</text>
+      <text class='text2'>三生三世</text>
+    </view>
+    <view>
+      <text class='text1'>所属目录：</text>
+      <text class='text2'>精彩文章>小说</text>
+    </view>
+    <view style='display:block;width:100%;'>
+      <text class='text1'>关键词：</text>
+      <text class='text3'>冒险</text>
+      <text class='text3'>爱情</text>
+      <text class='text3'>玄幻</text>
+    </view>
+    <view style='display:block;width:100%;'>
+      <text class='text1'>出处：</text>
+      <text class='text2'>起点中文网</text>
+    </view>   
+  </view>
+  <view class="artical-action-mid" bindtap="midaction"  bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></view>
+  <!-- 主体内容 -->
+  <view class='bgbg'></view>
+  <scroll-view  scroll-top="{{scroll_top}}" class="m-read-content" style="font-size:{{initFontSize}}px;" bindscroll="scrollContain" bindscrolltolower="bindscrolltolower" >
+    <template is="wxParse" data="{{wxParseData:Text.nodes}}"/>
+  </scroll-view>
+</view>
+  <!-- 底部 -->
+  <view class="bottom-nav bottom_nav" style="display:{{nav}}">
+    <view class="item menu-button" bindtap='shoucang'>
+      <view class="item-warp" wx:if="{{shoucang}}">
+        <view class="icon-menu">
+          <image src='/image/shouc_l.png'></image>
+        </view>
+        <view class="icon-text">收藏({{sc}})</view>
+      </view>
+      <view class="item-warp" wx:else>
+        <view class="icon-menu">
+          <image src='/image/shouc_b.png'></image>
+        </view>
+        <view class="icon-text">收藏({{sc}})</view>
+      </view>
+    </view>
+    <view class="item current" bindtap="zitiaction">
+      <view class="item-warp" wx:if="{{zitiaction}}">
+        <view class="icon-ft">
+          <image src='/image/like_l.png'></image>
+        </view>
+        <view class="icon-text">喜欢({{like}})</view>
+      </view>
+      <view class="item-warp" wx:else>
+        <view class="icon-ft">
+          <image src='/image/like_b.png'></image>
+        </view>
+        <view class="icon-text">喜欢({{like}})</view>
+      </view>
+    </view>
+    <view class="item" bindtap="dayNight">
+      <view class="item-warp" wx:if="{{daynight}}">
+        <view class="icon-day">
+          <image src='/image/nolike_l.png'></image>
+        </view>
+        <view class="icon-text">不喜欢({{nolike}})</view>
+      </view>
+      <view class="item-warp" wx:else>
+        <view class="icon-night">
+          <image src='/image/nolike_b.png'></image>
+        </view>
+        <view class="icon-text">不喜欢({{nolike}})</view>
+      </view>
+    </view>
+  </view>
+  <view class="{{tsk?'zhezhao':'hide'}}"></view>
+  <view class="{{tsk?'tishi':'hide'}}">
+      <view>
+        <image src='/image/like_b.png '></image>
+      </view>
+      <view>
+        <text>喜欢</text>
+      </view>
+    </view>
+  <view class="{{tsks?'zhezhao':'hide'}}"></view>
+  <view class="{{tsks?'tishi':'hide'}}">
+      <view>
+        <image src='/image/xinsui.gif '></image>
+      </view>
+      <view>
+        <text>不喜欢</text>
+      </view>
+    </view>

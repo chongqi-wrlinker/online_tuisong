@@ -1,5 +1,6 @@
 // pages/newindex/newindex.js
 var api=require("../../api/api.js");
+var common=require("../../api/common.js");
 Page({
 
   /**
@@ -8,78 +9,23 @@ Page({
   data: {
     movies: [
       { url: '/image/toutu.gif ' },
-      { url: 'http://img04.tooopen.com/images/20130617/tooopen_21241404.jpg' },
-      { url: 'http://img04.tooopen.com/images/20130701/tooopen_20083555.jpg' },
       { url: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg' }
     ],
-    list: [{
-      id: 1,
-      name: '名言警句',
-      count: [
-        {
-          leveid: 1,
-          levename: '名人名言'
-        },
-        {
-          leveid: 2,
-          levename: '格言警句'
-        },
-        {
-          leveid: 3,
-          levename: '民间谚语'
-        },
-      ]
-    }, {
-      id: 2,
-      name: '精彩文章',
-      count: [
-        {
-          leveid: 1,
-          levename: '小说'
-        }, {
-          leveid: 2,
-          levename: '散文'
-        }, {
-          leveid: 3,
-          levename: '剧本'
-        }, {
-          leveid: 4,
-          levename: '剧小说'
-        },
-      ]
-    }, {
-      id: 3,
-      name: '诗词歌赋',
-      count: [
-        {
-          leveid: 1,
-          levename: '诗'
-        }, {
-          leveid: 2,
-          levename: '词'
-        }
-      ]
-    }, {
-      id: 4,
-      name: '科学百科',
-      count: [
-        {
-          leveid: 1,
-          levename: '无限个为什么'
-        }, {
-          leveid: 2,
-          levename: '生活常识小妙招'
-        }
-      ]
-    }],
+    clickList:[],//点击排序文章列表
+    timeList:[],//时间排序文章列表
+    restMuluList: [],//分类目录类别
+    likedList:[],//用户可能喜欢的内容
     tuijian:true,
     fenlei:false,
     wode:false,
   },
+
+  //查询更多的方法
   more: function (e) {
-    wx.navigateTo({
-      url: '/pages/more/index',
-    })
+      var type = e.currentTarget.dataset.type;
+      wx.navigateTo({
+          url: '/pages/more/index?type='+type,
+      })
   },
   tuijian: function (e) {
     this.setData({
@@ -88,9 +34,19 @@ Page({
       wode: false,
     })
   },
-  lishi: function (e) {
+  xiangxi: function (e) {
     wx.navigateTo({
-      url: '/pages/lishi/index',
+      url: '/pages/xiangxi/index',
+    })
+  },
+  wyShouChang: function (e) {
+      wx.navigateTo({
+          url: '/pages/shouchang/index',
+      })
+  },
+  mylike: function (e) {
+    wx.navigateTo({
+      url: '/pages/myliek/index',
     })
   },
   shezhi: function (e) {
@@ -99,17 +55,38 @@ Page({
     })
   },
   fenlei: function (e) {
-    this.setData({
-      tuijian: false,
-      fenlei: true,
-      wode: false,
-    })
+      //获取用户的设置偏好后的目录列表
+     var userID=wx.getStorageSync("userID");
+     var that=this;
+     wx.request({
+         url: api.getRestMuluList(),
+         data: { userID: userID },
+         success:function(res){
+            var fianlArr = common.dealRestMuluList(res.data.msg);
+            that.setData({
+                restMuluList: fianlArr,
+                tuijian: false,
+                fenlei: true,
+                wode: false,
+            });
+         }
+     })
   },
   wode: function (e) {
-    this.setData({
-      tuijian: false,
-      fenlei: false,
-      wode: true,
+    //获取用户可能喜欢的文章
+    var userID=wx.getStorageSync("userID");
+    var that=this;
+    wx.request({
+        url: api.getUserLikeContentList(),
+        data:{page:1,userID:userID},
+        success:function(res){
+            that.setData({
+                likedList:res.data,
+                tuijian: false,
+                fenlei: false,
+                wode: true,
+            })
+        }
     })
   },
   yuedu: function (e) {
@@ -127,7 +104,27 @@ Page({
    */
   onLoad: function (options) {
     
+    //填充推送内容信息
+    var userID=wx.getStorageInfoSync("userID");
+    var that=this;
+    wx.request({
+        url: api.getContentListByClick(),
+        data: { userID: userID},
+        success:function(e){
+            var clickList = e.data.msg.click;
+            var timeList = e.data.msg.time;
+            that.setData({
+                clickList: clickList,
+                timeList: timeList
+            });
+            wx.hideNavigationBarLoading();
+        }
+    })
+
+      
   },
+   
+
  
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -140,7 +137,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+      //获取用户的
   },
 
   /**

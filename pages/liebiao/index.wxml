@@ -1,7 +1,7 @@
 <view class='main'>
   <view class='lieb'>
         <image src='/image/baike.png' class='tup'></image>
-        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='titles' bindtap='xiangxi'>标题</view>
         <view class='liulan'>
           <view>
             <image src='/image/shouc.gif'></image>
@@ -23,7 +23,7 @@
       </view>
       <view class='lieb'>
         <image src='/image/toutu.gif' class='tup'></image>
-        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='titles' bindtap='xiangxi'>标题</view>
         <view class='liulan'>
           <view>
             <image src='/image/shouc.gif'></image>
@@ -45,7 +45,7 @@
       </view>
       <view class='lieb'>
         <image src='/image/baike.png' class='tup'></image>
-        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='titles' bindtap='xiangxi'>标题</view>
         <view class='liulan'>
           <view>
             <image src='/image/shouc.gif'></image>
@@ -67,7 +67,7 @@
       </view>
       <view class='lieb'>
         <image src='/image/toutu.gif' class='tup'></image>
-        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='titles' bindtap='xiangxi'>标题</view>
         <view class='liulan'>
           <view>
             <image src='/image/shouc.gif'></image>
@@ -89,7 +89,7 @@
       </view>
       <view class='lieb'>
         <image src='/image/baike.png' class='tup'></image>
-        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='titles' bindtap='xiangxi'>标题</view>
         <view class='liulan'>
           <view>
             <image src='/image/shouc.gif'></image>
@@ -111,7 +111,7 @@
       </view>
       <view class='lieb'>
         <image src='/image/toutu.gif' class='tup'></image>
-        <view class='titles' bindtap='yuedu'>标题</view>
+        <view class='titles' bindtap='xiangxi'>标题</view>
         <view class='liulan'>
           <view>
             <image src='/image/shouc.gif'></image>

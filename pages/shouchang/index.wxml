@@ -1,16 +1,16 @@
-<block wx:if="{{pageData.totalCount > 0}}">
+<block wx:if="{{checkExist}}">
 <view class='main'>
-  <block wx:for="{{listData}}" wx:key="key">
+  <block wx:for="{{contentList}}" wx:key="key">
         <view class='lieb'>
           <image src='/image/shici.png' class='tup'></image>
-          <view class='titles' bindtap='xiangxi'>{{item.title?item.title:"无题"}}</view>
+          <view class='titles' bindtap='yuedu'>{{item.title?item.title:"无题"}}</view>
           <view class='liulan'>
             <view>
-              <image src='/image/shouc.gif'></image>
+              <image src='/image/shouc.png'></image>
               <text>{{item.shouChangCount}}</text>
             </view>
             <view>
-              <image src='/image/yan.gif'></image>
+              <image src='/image/yan.png'></image>
               <text>{{item.click}}</text>
             </view>
             <view>
@@ -32,25 +32,10 @@
             <view class='times'>{{item.time}}</view>
           </view>
         </view>
-    </block>
-    <block wx:if="{{nextPage<= pageData.totalPage}}">
-        <view>
-            <view style='width:140rpx;height:140rpx;margin:auto'>
-                <image src="/image/loading.gif" style='width:100%;height:100%;'></image>
-            </view>
-        </view>
-    </block>
-    <block wx:else>
-        <view>
-            <view style='width:140rpx;height:140rpx;margin:auto'>
-                我也是有底线的
-            </view>
-        </view>
-    </block>
-    
+        </block>
 </view>
 </block>
-
 <block wx:else>
-暂时没有数据，敬请期待
+    您没有收藏记录
 </block>
+

@@ -112,9 +112,9 @@ function html2json(html, bindName) {
                     var name = attr.name;
                     var value = attr.value;
                     if (name == 'class') {
-                        console.dir(value);
+                        //console.dir(value);
                         //  value = value.join("")
-                        node.classStr = value;
+                        //node.classStr = value;
                     }
                     // has multi attibutes
                     // make it array of attribute
@@ -152,7 +152,7 @@ function html2json(html, bindName) {
             if (node.tag === 'img') {
               
                 node.imgIndex = results.images.length;
-                var imgUrl = node.attr.src;
+                var imgUrl = "https://timgsa.baidu.com"+node.attr.src;
                 
                 if (imgUrl[0] == '') {
                     imgUrl.splice(0, 1);

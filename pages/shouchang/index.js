@@ -6,23 +6,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-      showLogin:true
+      checkExist:true,
+      pageData:{},
+      contentList:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      wx.showNavigationBarLoading();
+      //获取用户的收藏记录
+      this.getUserShouChang(1);
+  },
+
+  getUserShouChang:function(page){
+      var that=this;
       var userID=wx.getStorageSync("userID");
-      if(userID<1){
-          var showLogin=false;
-      }else{
-          var showLogin=true;
-          //获取用户的收藏记录
-      }
-      this.setData({
-          showLogin: showLogin
-      });
+      wx.request({
+          url: api.getUserShouChangData(),
+          data: { page: page, userID: userID},
+          success:function(data){
+              var flag = parseInt(data.data.msg.pageData.totalCount);
+              if(flag<1){
+                  var checkExist=false;
+              }else{
+                  var checkExist = true;
+              }
+              that.setData({
+                  checkExist: checkExist,
+                  pageData: data.data.msg.pageData,
+                  contentList: data.data.msg.data
+              });
+              wx.hideNavigationBarLoading();
+          }
+      })
   },
 
     //点击授权的返回方法
@@ -45,11 +63,6 @@ Page({
   yuedu: function (e) {
     wx.navigateTo({
       url: '/pages/yuedu/index',
-    })
-  },
-  xiangxi: function (e) {
-    wx.navigateTo({
-      url: '/pages/xiangxi/index',
     })
   },
   click: function (e) {

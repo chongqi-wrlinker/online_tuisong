@@ -1,21 +1,22 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/fenlei/index",
-    "pages/wode/index",
-    "pages/lishi/index",
-    "pages/more/index",
-    "pages/yuedu/index",
-    "pages/shezhi/index",
-    "pages/shouchang/index",
-    "pages/liebiao/index",
-    "pages/myliek/index",
-    "pages/xiangxi/index"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#3fb277",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "#3fb277"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/xiangxi/index",
+        "pages/fenlei/index",
+        "pages/wode/index",
+        "pages/lishi/index",
+        "pages/more/index",
+        "pages/yuedu/index",
+        "pages/shezhi/index",
+        "pages/shouchang/index",
+        "pages/liebiao/index",
+        "pages/myliek/index",
+        "pages/mylist/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#3fb277",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "#3fb277"
+    }
 }

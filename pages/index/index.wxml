@@ -1,3 +1,5 @@
+<import src="../../template/list/list.wxml"/>
+<import src="../../template/my/my.wxml"/>
 <view class="body">
   <view class='top'>
     <view class="{{tuijian?'choose':''}}" bindtap='tuijian'>推荐</view>
@@ -14,90 +16,21 @@
         </block>  
       </swiper> 
     </view>
-    <view class='bankuai'>
-      <view class='header'>
-        <image src='/image/jingdian.gif'></image>
-        <text>热门内容</text>
-        <view class='more' bindtap='more' data-type="1">更多 〉</view>
-      </view>
-      <view class='mian'>
-        <block wx:for="{{clickList}}" wx:key="key">
-        <view class='lieb'>
-          <image src='/image/shici.png' class='tup'></image>
-          <view class='titles' bindtap='xiangxi'>{{item.title?item.title:"无题"}}</view>
-          <view class='liulan'>
-            <view>
-              <image src='/image/shouc.png'></image>
-              <text>{{item.shouChangCount}}</text>
-            </view>
-            <view>
-              <image src='/image/yan.png'></image>
-              <text>{{item.click}}</text>
-            </view>
-            <view>
-              <image src='/image/nolike.png'></image>
-              <text>66</text>
-            </view>
-            <view>
-              <image src='/image/like.png'></image>
-              <text>66</text>
-            </view>
-          </view>
-          <view class='guanjianci'>
-                <block wx:for="{{item.keywordlist}}" wx:key="key1">
-                    <text bindtap='click'>{{item}}</text>
-                </block>
-          </view>
-          <view class='sanh'>
-            <view class='lei'>{{item.muluName}}</view>
-            <view class='times'>{{item.time}}</view>
-          </view>
+    <block wx:for="{{articleList}}" wx:key="ky">
+        <view class='bankuai'>
+            <view class='header'>
+            <image src='/image/jingdian.gif'></image>
+            <text>{{item.name}}</text>
+            <view class='more' bindtap='more' data-name="{{item.name}}" data-id="{{item.id}}">更多 〉</view>
         </view>
-        </block>
-      </view>
-    </view>
-    <view class='bankuai'>
-      <view class='header'>
-        <image src='/image/remen.gif'></image>
-        <text>最新推荐</text>
-        <view class='more'  bindtap='more' data-type="2">更多 〉</view>
-      </view>
-      <view class='mian'>
-        <block wx:for="{{timeList}}" wx:key="key">
-        <view class='lieb'>
-          <image src='/image/shici.png' class='tup'></image>
-          <view class='titles' bindtap='xiangxi'>{{item.title?item.title:"无题"}}</view>
-          <view class='liulan'>
-            <view>
-              <image src='/image/shouc.png'></image>
-              <text>{{item.shouChangCount}}</text>
-            </view>
-            <view>
-              <image src='/image/yan.png'></image>
-              <text>{{item.click}}</text>
-            </view>
-            <view>
-              <image src='/image/nolike.png'></image>
-              <text>66</text>
-            </view>
-            <view>
-              <image src='/image/like.png'></image>
-              <text>66</text>
-            </view>
-          </view>
-          <view class='guanjianci'>
-                <block wx:for="{{item.keywordlist}}" wx:key="key1">
-                    <text bindtap='click'>{{item}}</text>
-                </block>
-          </view>
-          <view class='sanh'>
-            <view class='lei'>{{item.muluName}}</view>
-            <view class='times'>{{item.time}}</view>
-          </view>
+        <view class='mian'>
+            <block wx:for="{{item.articleList}}" wx:key="ky2">
+                <template is="gengDuoList"  data="{{item}}"></template>
+            </block>
         </view>
-        </block>
-      </view>
-    </view>
+        </view>
+    </block>
+    
   </view>
   <!--分类-->
   <view class="{{fenlei?'show':'hidden'}}">
@@ -106,56 +39,12 @@
         <text>{{item.name}}</text>
       </view>
       <view class='right'>
-        <text wx:for="{{item.children}}" wx:key="{{key3}}" bindtap='click'>{{item.name}}</text>
+        <text wx:for="{{item.children}}" wx:key="{{key3}}" bindtap='click' data-muluid="{{item.id}}" data-name="{{item.name}}">{{item.name}}</text>
       </view>
     </view>
   </view>
   <!--我的-->
   <view class="{{wode?'show':'hidden'}}">
-      <view class='headers'>
-      <view class='lefts' bindtap='wyShouChang'><image src='/image/lishi.png' class='lishi'></image><text class='lishit'>我的收藏</text></view>
-      <view class='center' bindtap='mylike'><image src='/image/like.png' class='lishi'></image><text class='lishit'>我的喜欢</text></view>
-      <view class='rights' bindtap='shezhi'><image src='/image/shezhi.gif' class='aihao'></image><text class='aihaot'>偏好设置</text></view>
-    </view>
-    <view class='main'>
-      <view>
-        <text class='like'>您可能感兴趣的</text>
-      </view>
-      <view class='liebiao'>
-        <block wx:for="{{likedList}}" wx:key="key">
-        <view class='lieb'>
-          <image src='/image/shici.png' class='tup'></image>
-          <view class='titles' bindtap='xiangxi'>{{item.title?item.title:"无题"}}</view>
-          <view class='liulan'>
-            <view>
-              <image src='/image/shouc.png'></image>
-              <text>{{item.shouChangCount}}</text>
-            </view>
-            <view>
-              <image src='/image/yan.png'></image>
-              <text>{{item.click}}</text>
-            </view>
-            <view>
-              <image src='/image/nolike.png'></image>
-              <text>66</text>
-            </view>
-            <view>
-              <image src='/image/like.png'></image>
-              <text>66</text>
-            </view>
-          </view>
-          <view class='guanjianci'>
-                <block wx:for="{{item.keywordlist}}" wx:key="key1">
-                    <text bindtap='click'>{{item}}</text>
-                </block>
-          </view>
-          <view class='sanh'>
-            <view class='lei'>{{item.muluName}}</view>
-            <view class='times'>{{item.time}}</view>
-          </view>
-        </view>
-        </block>
-      </view>
-    </view>
+      <template is="my" data="{{myData}}"></template>
   </view>
 </view>

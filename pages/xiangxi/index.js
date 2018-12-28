@@ -1,4 +1,5 @@
 //logs.js
+var api=require("../../api/api.js");
 let wxparse = require("../../wxParse/wxParse.js");
 var util = require('../../utils/util.js')
 var touchDot = 0;//触摸时的原点 
@@ -6,6 +7,7 @@ var time = 0;// 时间记录，用于滑动时且时间小于1s则执行左右�
 var interval = "";// 记录/清理时间记录 
 Page({
   data: {
+      articleInfo:[],
     scroll_top: 0,
     Text: "",
     initFontSize: '14',
@@ -21,111 +23,33 @@ Page({
     tsk:false,
     tsks: false,
   },
-  onLoad: function () {
-    // this.setData({
-    //   logs: (wx.getStorageSync('logs') || []).map(function (log) {
-    //     return util.formatTime(new Date(log))
-    //   })
-    // })
-    // 本地提取字号大小
-    var that = this;
-    wx.getStorage({
-      key: 'initFontSize',
-      success: function (res) {
-        // console.log(res.data)
-        that.setData({
-          initFontSize: res.data
-        })
-      }
-    })
-    //存储背景色
-    wx.getStorage({
-      key: 'bodyColor',
-      success: function (res) {
-        // console.log(res.data)
-        that.setData({
-          bodyColor: res.data
-        })
-      }
-    })
-    wx.getStorage({
-      key: '_num',
-      success: function (res) {
-        // console.log(res.data)
-        that.setData({
-          _num: res.data
-        })
-      }
-    })
-    wx.getStorage({
-      key: 'daynight',
-      success: function (res) {
-        // console.log(res.data)
-        that.setData({
-          daynight: res.data
-        })
-      }
-    })
-    //数据接口
-    wx.request({
-      url: 'http://book.baiwancangshu.com/Books/bookRead', //仅为示例，并非真实的接口地址
-      data: {
-        "bookId": "86",
-        "chapterId": "2",
-        "isDel": 1,
-        "token": "",
-        "os": 3,
-        "channel": "",
-        "netname": "m"
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-      }
-    })
-    that.setData({
-      Text: "<b>大婚当天</b>，她在郊外醒来，衣衫褴褛，在众人的鄙夷下，一步一个血印踏入皇城……她是无父无母任人欺凌的孤女，他是一人之下、万人之上的铁血王爷。她满身是伤，狼狈不堪。他遗世独立，风华无双。她卑微伏跪，他傲视天下。如此天差地别的两人，却阴差阳错<img src='/timg?image&quality=80&size=b9999_10000&sec=1545021566695&di=e8cd553ca2aec0bee18e9b2b7e7c6012&imgtype=0&src=http%3A%2F%2Fimg1c.xgo-img.com.cn%2Fpics%2F1503%2F1502063.jpg'>地相遇……一件锦衣，遮她一身污秽，换她一世情深。21世纪天才女军医将身心托付，为这铁血王爷风华天下、舔刃饮血、倾尽一切，只求此生结发为夫妻，恩爱两不疑，却不想生死关头，他却挥剑斩断她的生路……医者：下医医病，中医医人，上医医国。神医凤轻尘，以医术救人治国平天下大婚当天，她在郊外醒来，衣衫褴褛，在众人的鄙夷下，一步一个血印踏入皇城……她是无父无母任人欺凌的孤女，他是一人之下、万人之上的铁血王爷。她满身是伤，狼狈不堪。他遗世独立，风华无双。她卑微伏跪，他傲视天下。如此天差地别的两人，却阴差阳错地相遇……一件锦衣，遮她一身污秽，换她一世情深。21世纪天才女军医将身心托付，为这铁血王爷风华天下、舔刃饮血、倾尽一切，只求此生结发为夫妻，恩爱两不疑，却不想生死关头，他却挥剑斩断她的生路……医者：下医医病，中医医人，上医医国。神医凤轻尘，以医术救人治国平天下的传奇的传奇<img src='/timg?image&quality=80&size=b9999_10000&sec=1545021566695&di=e8cd553ca2aec0bee18e9b2b7e7c6012&imgtype=0&src=http%3A%2F%2Fimg1c.xgo-img.com.cn%2Fpics%2F1503%2F1502063.jpg'>",
-      scroll_top: 0
-    })
-    let winPage = this;
-    wxparse.wxParse('Text', 'html', that.data.Text, this, 5);
+  onLoad: function (options) {
+      var that=this;
+      //var articleID=9461;
+      var articleID = options.articleID;
+      var userID=wx.getStorageSync("userID");
+      wx.request({
+          url: api.getOneArticleInfo(),
+          data: { articleID: articleID, userID: userID},
+          success:function(res){
+              console.log(res);
+              if (res.data[0]['muLuInfo'][0]['pid']==21){
+                  //该类型是诗词模板，需要断句
+                  res.data[0]['content']=util.duanJu(res.data[0]['content']);
+                  res.data[0]['des'] = util.desDuanJu(res.data[0]['des']);
+                  
+              }
+
+              that.setData({
+                  articleInfo:res.data[0]
+              });
+          }
+      })
+    
+    
   },
-  //事件处理函数
-  //字体变大
-  bindBig: function () {
-    var that = this;
-    if (that.data.initFontSize > 20) {
-      return;
-    }
-    var FontSize = parseInt(that.data.initFontSize)
-    that.setData({
-      initFontSize: FontSize += 1
-    })
-    // console.log(that.data.initFontSize)
-    wx.setStorage({
-      key: "initFontSize",
-      data: that.data.initFontSize
-    })
-  },
-  //字体变小
-  bindSmall: function () {
-    var that = this;
-    if (that.data.initFontSize < 12) {
-      return;
-    }
-    var FontSize = parseInt(that.data.initFontSize)
-    that.setData({
-      initFontSize: FontSize -= 1
-    })
-    // console.log(that.data.initFontSize)
-    wx.setStorage({
-      key: "initFontSize",
-      data: that.data.initFontSize
-    })
-  },
+  
+  
   //点击中间区域显示底部导航
   midaction: function () {
     if (this.data.nav == 'none') {
@@ -140,143 +64,97 @@ Page({
 
     }
   },
-  //点击字体出现窗口
-  zitiaction: function () {
-    if (this.data.daynight==true){
-      this.setData({
-        daynight: false,
-      })
-      this.setData({
-        nolike: this.data.nolike - 1,
-      })
-      this.setData({
-        zitiaction: true,
-        tsk:true,
-      })
-      this.setData({
-        like: this.data.like + 1,
-      })
-      var that = this;
-      setTimeout(function () {
-        that.setData({
-          tsk: false,
-        })
-      }, 1100)
-    }else{
-      if (this.data.zitiaction == true) {
-        this.setData({
-          zitiaction: false,
-        })
-        this.setData({
-          like: this.data.like - 1,
-        })
-        wx.showToast({
-          title: '取消成功',
-          icon: 'success',
-          duration: 1000
-        })
-      } else {
-        this.setData({
-          zitiaction: true,
-          tsk: true,
-        })
-        this.setData({
-          like: this.data.like + 1,
-        })
-        var that=this;
-        setTimeout(function () {
-          that.setData({
-            tsk: false,
-          })
-        }, 1100)
-      }
-    }
-  },
+ 
+ //收藏方法
   shoucang: function () {
-    if (this.data.shoucang == true) {
-      this.setData({
-        shoucang: false,
-      })
-      this.setData({
-        sc: this.data.sc-1,
-      })
-    } else {
-      this.setData({
-        shoucang: true,
-      })
-      this.setData({
-        sc: this.data.sc + 1,
-      })
-    }
+        var articleInfo = this.data.articleInfo;
+        articleInfo.shouChangState = !articleInfo.shouChangState;
+        if (articleInfo.shouChangState) {
+            var count = parseInt(articleInfo.shouChangCount)+1;
+            var flag=1;
+        } else {
+            var count = parseInt(articleInfo.shouChangCount)- 1;
+            var flag=2;
+        }
+        console.log(flag);
+        //添加或者删除收藏记录
+        var userID=wx.getStorageSync("userID");
+        var articleID=articleInfo.id;
+        wx.request({
+            url: api.dealShouChang(),
+            data: { userID: userID, articleID: articleID, flag: flag},
+            success:function(res){
+                console.log(res);
+            }
+        })
+        articleInfo.shouChangCount=count;
+        this.setData({
+          articleInfo: articleInfo
+        });
   },
-  //选择背景色
-  bgChange: function (e) {
-    // console.log(e.target.dataset.num)
-    // console.log(e)
-    this.setData({
-      _num: e.target.dataset.num,
-      bodyColor: this.data.colorArr[e.target.dataset.num].value
-    })
-    wx.setStorage({
-      key: "bodyColor",
-      data: this.data.colorArr[e.target.dataset.num].value
-    })
-    wx.setStorage({
-      key: "_num",
-      data: e.target.dataset.num
-    })
-  },
+  //喜欢方法
+    zitiaction: function () {
+        var articleInfo=this.data.articleInfo;
+        if (articleInfo.likeState == 0) {
+            var state=1;
+            articleInfo.likeState=1;
+            articleInfo.likeCount = parseInt(articleInfo.likeCount)+1;
+        } else if (articleInfo.likeState == 1){
+            var state = 0;
+            articleInfo.likeState = 0;
+            articleInfo.likeCount = parseInt(articleInfo.likeCount) - 1;
+        } else if (articleInfo.likeState==2){
+            articleInfo.likeState = 1;
+            articleInfo.likeCount = parseInt(articleInfo.likeCount) + 1;
+            articleInfo.dontLikeCount = parseInt(articleInfo.dontLikeCount) - 1;
+            var state = 1;
+        }
+        this.setData({
+            articleInfo: articleInfo
+        });
+        //修改喜欢的数量
+        var userID=wx.getStorageSync("userID");
+        var articleID=articleInfo.id;
+        wx.request({
+            url: api.dealListArticle(),
+            data: { userID: userID, articleID: articleID, state: state},
+            success:function(res){
+                console.log(res);
+            }
+        })
+
+    },
+ 
   //切换白天夜晚
   dayNight: function () {
-    if (this.data.zitiaction==true){
-      this.setData({
-        zitiaction: false,
-        tsks: true,
-      })
-      this.setData({
-        like: this.data.like - 1,
-      })
-      this.setData({
-        daynight: true,
-      })
-      this.setData({
-        nolike: this.data.nolike + 1,
-      })
-      var that = this;
-      setTimeout(function () {
-        that.setData({
-          tsks: false,
-        })
-      }, 1100)
-    }else{
-      if (this.data.daynight == true) {
-        this.setData({
-          daynight: false,
-        })
-        this.setData({
-          nolike: this.data.nolike - 1,
-        })
-        wx.showToast({
-          title: '取消成功',
-          icon: 'success',
-          duration: 1000
-        })
-      } else {
-        this.setData({
-          daynight: true,
-          tsks:true,
-        })
-        this.setData({
-          nolike: this.data.nolike + 1,
-        })
-        var that=this;
-        setTimeout(function () {
-          that.setData({
-            tsks: false,
-          })
-        }, 1100)
+      var articleInfo = this.data.articleInfo;
+      if (articleInfo.likeState == 0) {
+          var state = 2;
+          articleInfo.likeState = 2;
+          articleInfo.dontLikeCount = parseInt(articleInfo.dontLikeCount) + 1;
+      } else if (articleInfo.likeState == 1) {
+          var state = 2;
+          articleInfo.likeState = 2;
+          articleInfo.likeCount = parseInt(articleInfo.likeCount) - 1;
+          articleInfo.dontLikeCount = parseInt(articleInfo.dontLikeCount) + 1;
+      } else if (articleInfo.likeState == 2) {
+          articleInfo.likeState = 0;
+          articleInfo.dontLikeCount = parseInt(articleInfo.dontLikeCount) - 1;
+          var state = 0;
       }
-    }
+      this.setData({
+          articleInfo: articleInfo
+      });
+      //修改喜欢的数量
+      var userID = wx.getStorageSync("userID");
+      var articleID = articleInfo.id;
+      wx.request({
+          url: api.dealListArticle(),
+          data: { userID: userID, articleID: articleID, state: state },
+          success: function (res) {
+              console.log(res);
+          }
+      })
   },
   //滚动隐藏窗口
   scrollContain: function () {

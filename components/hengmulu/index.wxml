@@ -1,0 +1,23 @@
+<import src="../../template/list/list.wxml"/>
+<scroll-view class="tab-list" scroll-x scroll-with-animation style='background-color:white;z-index:1;position:fixed;top:0;'>
+    <view wx:for="{{tabList}}" wx:key="ky"  class="tab-item {{curTab===index ? 'selected-tab':''}}" data-index="{{index}}" data-id="{{item.id}}" bindtap="selectTab">{{item.name}}</view>
+</scroll-view>
+<swiper current="{{current}}" bindchange="swiperChange" style='height:{{result?swiperHeight:"400px"}};margin-top:88rpx'>
+    <block wx:if="{{loadingState}}">
+        <template is="waiting"></template>
+    </block>
+    <block wx:else>
+       <block wx:for="{{tabList}}" wx:key="ky1">
+            <swiper-item>
+                <block wx:if="{{result}}">
+                    <block wx:for="{{item.articleList}}" wx:key="ky">
+                        <template is="gengDuoList"  data="{{item}}"></template>
+                    </block>
+                </block>
+                <block wx:else>
+                    <template is="nullList"></template>
+                </block>
+            </swiper-item>
+        </block>
+    </block>
+</swiper>

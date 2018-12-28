@@ -2,7 +2,9 @@
 var api=require("api/api.js");
 App({
   onLaunch: function () {
+      
       wx.showNavigationBarLoading();
+      var that=this;
       wx.login({
           success: function (res) {
               //发起网络请求openid
@@ -16,6 +18,24 @@ App({
               })
           }
       });
+
+      wx.getSetting({
+          success(res) {
+              if (res.authSetting['scope.userInfo']) {
+                  // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+                  wx.setStorageSync("getUserInfoState", true);
+                  wx.getUserInfo({
+                      success(res){
+                          wx.setStorageSync("userInfo", res.userInfo);
+                      }
+                  })
+                 
+              } else {
+                  wx.setStorageSync("getUserInfoState", false);
+              }
+          }
+      })
+      
   },
   globalData: {
     userInfo: null

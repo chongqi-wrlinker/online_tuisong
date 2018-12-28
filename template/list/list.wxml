@@ -1,0 +1,41 @@
+<!--查看更多的文章列表-->
+<template name="gengDuoList">
+    <view class='lieb'>
+        <image src='/image/shici.png' class='tup'></image>
+        <view class='titles' bindtap='xiangxi' data-id="{{item.id}}">{{item.title?item.title:item.content}}</view>
+        <view class='liulan'>
+            <view>
+                <image src='/image/shouc.png'></image>
+                <text>{{item.shouChangCount}}</text>
+             </view>
+         <view>
+        <image src='/image/yan.png'></image>
+        <text>{{item.click}}</text>
+        </view>
+            <view>
+                <image src='/image/nolike.png'></image>
+                        <text>{{item.dontLikeCount}}</text>
+                        </view>
+                        <view>
+                        <image src='/image/like.png'></image>
+                        <text>{{item.likeCount}}</text>
+                        </view>
+                    </view>
+                    <view class='guanjianci'>
+                        <text bindtap='click'>{{item.keywordlist}}</text>
+                    </view>
+                    <view class='sanh'>
+                        <view class='lei'>{{item['muLuInfo'][0]['name']}}</view>
+                    </view>
+                </view>
+</template>
+
+<template name="waiting">
+    <view style='text-align:center;'>
+        <image class='waitingImg' src="/image/loading.gif"></image>
+    </view>
+</template>
+
+<template name="nullList">
+    <view class="nulltitle">{{noContent}}</view>
+</template>

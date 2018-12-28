@@ -1,0 +1,26 @@
+<template name="my">
+<view class="container">
+    <view class="user-info" style="background-image: url({{myData.skin}})">
+        <block wx:if="{{myData.userInfoState}}">
+            <image src="{{myData.userInfo.avatarUrl}}" class="user-avatar"></image>
+            <view class="user-nickname">{{myData.userInfo.nickName}}
+                <view class="user-sex-male" wx:if="{{myData.userInfo.gender==1}}"></view>
+                <view class="user-sex-female" wx:if="{{myData.userInfo.gender==2}}"></view>
+            </view>
+        </block>
+        <block wx:else>
+            <image src="{{myData.skin}}" class="user-avatar"></image>
+            <view class="user-nickname">点击头像跟换</view>
+        </block>
+     
+    </view>
+    <view class="grids">
+        <block wx:for="{{myData.gridList}}" wx:for-item="gridItem" wx:for-index="gridIndex" wx:key="grid">
+            <view class="grid" bindtap='tumpUrl'  data-url="{{gridItem.enName}}">
+                <view class="grid-icon grid-icon-{{gridItem.enName}}"></view>
+                <view class="grid-title">{{gridItem.zhName}}</view>
+            </view>
+        </block>
+    </view>
+</view>
+</template>

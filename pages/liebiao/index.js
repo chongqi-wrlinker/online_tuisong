@@ -1,34 +1,52 @@
 // pages/more/index.js
+var api=require("../../api/api.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+      articleState:true,
+      articleList:[],
+      pageData:[],
+      muluID:0,
+      noContent: "当前目录暂时没有添加数据，敬请期待！！"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      //var muluID = 36
+      var muluID = options.muluID;
+      var name=options.name;
+      wx.showNavigationBarLoading();
+      wx.setNavigationBarTitle({
+          title: name
+      })
+      var that=this;
+      wx.request({
+          url: api.getArticleList(),
+          data:{muluID:muluID,page:1},
+          success:function(e){
+              that.setData({
+                  articleList:e.data.articleList,
+                  pageData:e.data.page,
+                  muluID: muluID,
+                  articleState: e.data.articleList.length>0?true:false
+              });
+              wx.hideNavigationBarLoading();
+          }
+      })
   },
-  yuedu: function (e) {
-    wx.navigateTo({
-      url: '/pages/yuedu/index',
-    })
-  },
+  
   xiangxi: function (e) {
+    var articleID = e.currentTarget.dataset.id; 
     wx.navigateTo({
-      url: '/pages/xiangxi/index',
+        url: '/pages/xiangxi/index?articleID=' + articleID,
     })
   },
-  click: function (e) {
-    wx.navigateTo({
-      url: '/pages/liebiao/index',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -68,7 +86,37 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+      var pageData=this.data.pageData;
+      var muluID = this.data.muluID;
+      if(pageData.nextPage!=0){
+          wx.showLoading({
+              title: '正在加载...',
+          })
+          var that=this;
+          var articleList = this.data.articleList;
+          wx.request({
+              url: api.getArticleList(),
+              data: { muluID: muluID, page: pageData.nextPage },
+              success: function (e) {
+                  that.setData({
+                      articleList: articleList.concat(e.data.articleList),
+                      pageData: e.data.page,
+                      muluID: muluID
+                  });
+                  wx.hideLoading();
+                  wx.showToast({
+                      title: '加载成功',
+                      icon:"success",
+                      duration:500
+                  })
+              }
+          })
+      }else{
+          wx.showToast({
+              title: '对不起，已经没有了',
+              icon:"none"
+          })
+      }
   },
 
   /**

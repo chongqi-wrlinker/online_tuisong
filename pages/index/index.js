@@ -9,8 +9,9 @@ Page({
   data: {
     movies: [
       { url: '/image/toutu.gif ' },
-      { url: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg' }
+        { url: '/image/toutu.gif' }
     ],
+    articleList:[],//首页推荐内容列表
     clickList:[],//点击排序文章列表
     timeList:[],//时间排序文章列表
     restMuluList: [],//分类目录类别
@@ -18,13 +19,35 @@ Page({
     tuijian:true,
     fenlei:false,
     wode:false,
+    myData:{
+        gridList: [
+            { enName: 'favorite', zhName: '收藏' },
+            { enName: 'like', zhName: '喜欢' },
+            { enName: 'dontlike', zhName: '不喜欢' },
+            { enName: 'setting', zhName: '偏好设置' }
+        ],
+        skin: 'https://static.sesine.com/wechat-weapp-movie/images/user_bg_2.jpg',
+        userInfoState:false,
+        userInfo: [],
+    },
   },
 
   //查询更多的方法
   more: function (e) {
-      var type = e.currentTarget.dataset.type;
+      var name = e.currentTarget.dataset.name;
+      var id = e.currentTarget.dataset.id;
+
+      //获取已经筛选出来设置了偏好的目录
+      var articleList = this.data.articleList;
+      var muluArr=new Array();
+      for(var i=0;i<articleList.length;i++){
+          if (articleList[i]['id']==id){
+              muluArr = articleList[i]['children'];
+              break;
+          }
+      }
       wx.navigateTo({
-          url: '/pages/more/index?type='+type,
+          url: '/pages/more/index?name=' + name + '&muluArr=' + muluArr,
       })
   },
   tuijian: function (e) {
@@ -35,10 +58,27 @@ Page({
     })
   },
   xiangxi: function (e) {
-    wx.navigateTo({
-      url: '/pages/xiangxi/index',
-    })
+      var articleID = e.currentTarget.dataset.id;
+      wx.navigateTo({
+          url: '/pages/xiangxi/index?articleID='+articleID,
+      })
   },
+  //用来分发地址（收藏，喜欢，不喜欢，设置）
+  tumpUrl:function(e){
+      var flagName=e.currentTarget.dataset.url;
+      if (flagName == "setting") {
+          //跳转到偏好设置页面
+          wx.navigateTo({
+              url: '/pages/shezhi/index',
+          })
+      }else{
+          //跳转到列表页面
+          wx.navigateTo({
+              url: '/pages/mylist/index?flagName=' + flagName
+          })
+      }
+  },
+
   wyShouChang: function (e) {
       wx.navigateTo({
           url: '/pages/shouchang/index',
@@ -59,10 +99,10 @@ Page({
      var userID=wx.getStorageSync("userID");
      var that=this;
      wx.request({
-         url: api.getRestMuluList(),
+         url: api.getRestMuLuList1(),
          data: { userID: userID },
          success:function(res){
-            var fianlArr = common.dealRestMuluList(res.data.msg);
+            var fianlArr = common.dealRestMuluList(res.data);
             that.setData({
                 restMuluList: fianlArr,
                 tuijian: false,
@@ -74,20 +114,12 @@ Page({
   },
   wode: function (e) {
     //获取用户可能喜欢的文章
-    var userID=wx.getStorageSync("userID");
-    var that=this;
-    wx.request({
-        url: api.getUserLikeContentList(),
-        data:{page:1,userID:userID},
-        success:function(res){
-            that.setData({
-                likedList:res.data,
-                tuijian: false,
-                fenlei: false,
-                wode: true,
-            })
-        }
-    })
+      this.setData({
+          
+          tuijian: false,
+          fenlei: false,
+          wode: true,
+      })
   },
   yuedu: function (e) {
     wx.navigateTo({
@@ -95,33 +127,36 @@ Page({
     })
   },
   click: function (e) {
+    var muluID=e.currentTarget.dataset.muluid;
+      var name = e.currentTarget.dataset.name;
     wx.navigateTo({
-      url: '/pages/liebiao/index',
+        url: '/pages/liebiao/index?muluID=' + muluID+"&name="+name,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    
-    //填充推送内容信息
-    var userID=wx.getStorageInfoSync("userID");
-    var that=this;
-    wx.request({
-        url: api.getContentListByClick(),
-        data: { userID: userID},
-        success:function(e){
-            var clickList = e.data.msg.click;
-            var timeList = e.data.msg.time;
-            that.setData({
-                clickList: clickList,
-                timeList: timeList
-            });
-            wx.hideNavigationBarLoading();
-        }
-    })
-
-      
+  onLoad: function (cb) {
+      //获取用户设置偏好后的目录推文章列表，每个目录10篇文章
+      var getUserInfoState = wx.getStorageSync("getUserInfoState");
+      var myData = this.data.myData;
+      myData.userInfoState = getUserInfoState;
+      myData.userInfo=wx.getStorageSync("userInfo");
+      this.setData({
+          myData: myData
+      });
+      var userID = wx.getStorageInfoSync("userID");
+      var that = this;
+      wx.request({
+          url: api.getIndexPageData(),
+          data: { userID: userID },
+          success: function (e) {
+              that.setData({
+                  articleList: e.data
+              });
+              wx.hideNavigationBarLoading();
+          }
+      })
   },
    
 

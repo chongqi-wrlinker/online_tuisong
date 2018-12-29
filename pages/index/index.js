@@ -78,22 +78,30 @@ Page({
           })
       }
   },
+  //绑定获取用户信息的方法
+  bindGetUserInfo: function (e) {
+      if (e.detail.errMsg == "getUserInfo:ok") {
+          wx.setStorageSync("getUserInfoState", true);
+          wx.setStorageSync("userInfo", e.detail.userInfo);
+          var myData = this.data.myData;
+          myData.userInfoState=true;
+          myData.userInfo = e.detail.userInfo;
+          this.setData({
+              myData: myData
+          });
+      }
+  },
+  
+  //跳转到搜索页面
+    toSearch:function(e){
+        wx.navigateTo({
+            url: '/pages/search/index',
+        })
+    },
 
-  wyShouChang: function (e) {
-      wx.navigateTo({
-          url: '/pages/shouchang/index',
-      })
-  },
-  mylike: function (e) {
-    wx.navigateTo({
-      url: '/pages/myliek/index',
-    })
-  },
-  shezhi: function (e) {
-    wx.navigateTo({
-      url: '/pages/shezhi/index',
-    })
-  },
+ 
+  
+ 
   fenlei: function (e) {
       //获取用户的设置偏好后的目录列表
      var userID=wx.getStorageSync("userID");
@@ -137,15 +145,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (cb) {
+     
+  },
+   
+  getIndexDataInfo:function(e){
       //获取用户设置偏好后的目录推文章列表，每个目录10篇文章
       var getUserInfoState = wx.getStorageSync("getUserInfoState");
       var myData = this.data.myData;
       myData.userInfoState = getUserInfoState;
-      myData.userInfo=wx.getStorageSync("userInfo");
+      myData.userInfo = wx.getStorageSync("userInfo");
       this.setData({
           myData: myData
       });
-      var userID = wx.getStorageInfoSync("userID");
+      var userID = wx.getStorageSync("userID");
       var that = this;
       wx.request({
           url: api.getIndexPageData(),
@@ -158,8 +170,6 @@ Page({
           }
       })
   },
-   
-
  
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -173,6 +183,8 @@ Page({
    */
   onShow: function () {
       //获取用户的
+      wx.showNavigationBarLoading();
+      this.getIndexDataInfo();
   },
 
   /**

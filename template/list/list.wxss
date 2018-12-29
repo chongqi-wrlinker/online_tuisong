@@ -84,3 +84,16 @@ margin-top:10rpx;
     text-align:center;
     color:#999;
 }
+
+.searchImage{
+    width: 70rpx;
+    height: 70rpx;
+    position:fixed;
+    bottom:80rpx;
+    right:40rpx;
+
+}
+.searchImage image{
+    width: 100%;
+    height: 100%;
+}

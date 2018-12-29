@@ -4,18 +4,20 @@
       <text class='mulu'>目录设置：</text>
       <text class='zushi'>点选下列目录保存为自己喜欢的目录</text>
     </view>
+    <checkbox-group bindchange="checkboxChange">
     <view class='bankuai' wx:for="{{list}}" wx:key="{{index}}">
       <view class='left'>
         <text>{{item.name}}</text>
       </view>
       <view class='right'>
-        <checkbox-group bindchange="checkboxChange">
-          <label class="checkbox" wx:for="{{item.count}}"  wx:key="{{indexs}}">
-              <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.levename}}
+        
+          <label class="checkbox" wx:for="{{item.children}}"  wx:key="{{indexs}}">
+              <checkbox value="{{item.id}}" checked="{{item.hobbyState}}"/>{{item.name}}
           </label>
-      </checkbox-group>
+      
       </view>
     </view>
+    </checkbox-group>
   </view>
   <!--<view class='hezi'>
     <view class='header'>
@@ -31,6 +33,6 @@
     </view>
   </view>-->
   <view class='an'>
-    <button class='button'>保存设置</button>
+    <button class='button' bindtap='saveConfig'>保存设置</button>
   </view>
 </view>

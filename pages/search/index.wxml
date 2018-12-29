@@ -1,0 +1,27 @@
+<view class="search-hd">
+    <view class="search-area">
+        <form bindsubmit="search">
+            <view class="search-type" bindtap="changeSearchType">{{searchType == 'article' ? '文章' : '作者'}}</view>
+            <input class="search-txt" name="keyword" placeholder="关键字，在类型那可以选择查询方向"/>
+            <button class="search-btn" formType="submit">搜索</button>
+        </form>
+    </view>
+    <view class="search-keyword">
+        <view class="search-keyword-title">热门文章推荐</view>
+        
+    </view>
+    <import src="../../template/list/list.wxml"/>
+
+        <view class='main'>
+            <block wx:for="{{hotArticleList}}" wx:key="ky">
+                <template is="gengDuoList"  data="{{item}}"></template>
+            </block>
+            
+        </view>
+</view>
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+  <block wx:for-items="{{actionSheetItems}}" wx:key="ky">
+    <action-sheet-item bindtap="bindaction" data-flag="{{item.flag}}">{{item.txt}}</action-sheet-item>
+  </block>
+  <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+</action-sheet>

@@ -19,6 +19,10 @@ Component({
       result:{
           type: Boolean,
           value:true
+      },
+      noContent:{
+          type:String,
+          value:""
       }
   },
 
@@ -64,6 +68,10 @@ Component({
                 current: index,
                 funcState:false
             })
+        },
+        //搜索方法
+      toSearch:function(e){
+          this.triggerEvent('toSearch');
         }
   }
 })

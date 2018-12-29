@@ -47,4 +47,5 @@
   <view class="{{wode?'show':'hidden'}}">
       <template is="my" data="{{myData}}"></template>
   </view>
+  <template is="xuanfuSearch"></template>
 </view>

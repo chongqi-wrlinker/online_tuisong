@@ -1,0 +1,2 @@
+/* pages/searchResult/index.wxss */
+@import "../../template/list/list.wxss";

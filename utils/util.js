@@ -37,8 +37,27 @@ function desDuanJu(str){
     return tempArr;
 }
 
+//获取2个数组的差集,arr1的长度大于arr2
+function getDiffArr(arr1,arr2){
+    var finalArr=new Array();
+    for(var i=0;i<arr1.length;i++){
+        var flag=false;
+        for(var j=0;j<arr2.length;j++){
+            if(arr1[i]==arr2[j]){
+                flag=true;
+                break;
+            }
+        }
+        if (!flag){
+            finalArr[finalArr.length] = arr1[i];
+        }
+    }
+    return finalArr;
+}
+
 module.exports = {
   formatTime: formatTime,
     duanJu: duanJu,
-    desDuanJu: desDuanJu
+    desDuanJu: desDuanJu,
+    getDiffArr: getDiffArr
 }

@@ -12,7 +12,8 @@ Page({
       result:true,
       swiperHeight:"0px",
       loadingState:true,
-      currentMuLuID:0
+      currentMuLuID:0,
+      noContent:"当前目录暂时没有数据，敬请期待"
   },
   //目录改变的方法
   changeMulu:function(e){
@@ -48,6 +49,14 @@ Page({
         var muluID=flagMulu['id'];
         this.getArticleList(1, muluID, muluList,"change");
     },
+    
+    //搜索方法
+    toSearch: function (e) {
+        wx.navigateTo({
+            url: '/pages/search/index',
+        })
+    },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -99,7 +108,7 @@ Page({
                                 muluList[i]['articleList'] = muluList[i]['articleList'].concat(res.data.articleList);
                             }
                             muluList[i]['pageData'] = res.data.page;
-                            swiperHeight = ((muluList[i]['articleList'].length) * 108) + "px";
+                            swiperHeight = ((muluList[i]['articleList'].length) * 105) + "px";
                         }
                     }
                     if (swiperHeight=="0px"){

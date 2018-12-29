@@ -10,7 +10,9 @@
         </block>
         <block wx:else>
             <image src="{{myData.skin}}" class="user-avatar"></image>
-            <view class="user-nickname">点击头像跟换</view>
+            <view class="user-nickname">
+                <button open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo">点击我跟换头像</button> 
+            </view>
         </block>
      
     </view>

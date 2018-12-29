@@ -1,78 +1,14 @@
 // pages/shezhi/index.js
+var api=require("../../api/api.js");
+var util=require("../../utils/util.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [{
-      id: 1,
-      name: '名言警句',
-      count: [
-        {
-          leveid: 1,
-          levename: '名人名言'
-        },
-        {
-          leveid: 2,
-          levename: '格言警句'
-        },
-        {
-          leveid: 3,
-          levename: '民间谚语'
-        },
-      ]
-    }, {
-      id: 2,
-      name: '精彩文章',
-      count: [
-        {
-          leveid: 1,
-          levename: '小说'
-        }, {
-          leveid: 2,
-          levename: '散文'
-        }, {
-          leveid: 3,
-          levename: '剧本'
-        }, {
-          leveid: 4,
-          levename: '剧小说'
-        },
-      ]
-    }, {
-      id: 3,
-      name: '诗词歌赋',
-      count: [
-        {
-          leveid: 1,
-          levename: '诗'
-        }, {
-          leveid: 2,
-          levename: '词'
-        }
-      ]
-    }, {
-      id: 4,
-      name: '科学百科',
-      count: [
-        {
-          leveid: 1,
-          levename: '无限个为什么'
-        }, {
-          leveid: 2,
-          levename: '生活常识小妙招'
-        }
-      ]
-    }],
-    itemss: [
-      { name: 'USA', value: '美国' },
-      { name: 'CHN', value: '中国' },
-      { name: 'BRA', value: '巴西' },
-      { name: 'JPN', value: '日本' },
-      { name: 'ENG', value: '英国' },
-      { name: 'TUR', value: '法国' },
-    ],
+    list: [],
+    likeList:[],
     dianjis:false,
     _dianji:1,
   },
@@ -82,19 +18,70 @@ Page({
     })
   },
   checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    this.setData({
+        likeList: e.detail.value,
+        dianjis:true
+    });
+    //console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   },
-  checke: function (e) {
-    var that = this;
-    that.setData({
-      dianjis: (!that.data.dianjis)
-    })
-  },
+  
+  //保存设置
+    saveConfig:function(e){
+        var dianjis = this.data.dianjis;
+        if (dianjis){
+            wx.showLoading({
+                title: '正在保存数据...',
+            })
+            var allList = this.data.list;
+            var userLike = this.data.likeList;
+            //取2者的差集，计算出用户不喜欢的目录
+            var allIdArr = new Array();
+            for (var i = 0; i < allList.length; i++) {
+                for (var j = 0; j < allList[i]['children'].length; j++) {
+                    allIdArr[allIdArr.length] = allList[i]['children'][j]['id'];
+                }
+            }
+            var userNotList = util.getDiffArr(allIdArr, userLike);
+            var fianlIdStr = userNotList.join("-");
+            //保存用户不喜欢的目录到数据库中
+            var userID = wx.getStorageSync("userID");
+            wx.request({
+                url: api.updateUserHoppy(),
+                data: { userID: userID, idArr: fianlIdStr},
+                success:function(res){
+                    wx.hideLoading();
+                    wx.showToast({
+                        title: '数据更新成功',
+                        icon: "success",
+                        duration:500
+                    })
+                }
+            })
+        }else{
+            wx.showToast({
+                title: '数据更新成功',
+                icon:"success"
+            })
+        }
+    },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    showView: (options.showView == "true" ? true : false)
+    //获取系统所有的目录，并且获取用户已经设置了偏好的目录
+    var userID=wx.getStorageSync("userID");
+    var that=this;
+    wx.request({
+        url: api.getHobbyMuLuList(),
+        data:{userID:userID},
+        success:function(res){
+            console.log(res.data);
+            that.setData({
+                list:res.data
+            });
+        }
+    })
   },
 
   /**

@@ -1,33 +1,33 @@
 <!--查看更多的文章列表-->
 <template name="gengDuoList">
     <view class='lieb'>
-        <image src='/image/shici.png' class='tup'></image>
+        <!--<image src='/image/shici.png' class='tup'></image>-->
         <view class='titles' bindtap='xiangxi' data-id="{{item.id}}">{{item.title?item.title:item.content}}</view>
+        <view class='guanjianci'>
+            <text bindtap='click'>{{item.keywordlist?item.keywordlist:"暂无"}}</text>
+        </view>
+        <view class='sanh'>
+            <view class='lei'>{{item['muLuInfo'][0]['name']}}</view>
+        </view>
         <view class='liulan'>
             <view>
-                <image src='/image/shouc.png'></image>
+                <image src='/image/index/collection.png'></image>
                 <text>{{item.shouChangCount}}</text>
              </view>
-         <view>
-        <image src='/image/yan.png'></image>
-        <text>{{item.click}}</text>
-        </view>
+            <view>
+                <image src='/image/index/eye.png' style='width:50rpx;'></image>
+                <text>{{item.click}}</text>
+            </view>
             <view>
                 <image src='/image/nolike.png'></image>
-                        <text>{{item.dontLikeCount}}</text>
-                        </view>
-                        <view>
-                        <image src='/image/like.png'></image>
-                        <text>{{item.likeCount}}</text>
-                        </view>
-                    </view>
-                    <view class='guanjianci'>
-                        <text bindtap='click'>{{item.keywordlist}}</text>
-                    </view>
-                    <view class='sanh'>
-                        <view class='lei'>{{item['muLuInfo'][0]['name']}}</view>
-                    </view>
-                </view>
+                <text>{{item.dontLikeCount}}</text>
+            </view>
+            <view>
+                <image src='/image/index/heart2.png'></image>
+                <text>{{item.likeCount}}</text>
+            </view>
+        </view>
+    </view>
 </template>
 
 <template name="waiting">
@@ -38,4 +38,10 @@
 
 <template name="nullList">
     <view class="nulltitle">{{noContent}}</view>
+</template>
+
+<template name="xuanfuSearch">
+    <view class='searchImage' bindtap='toSearch'>
+        <image src="data:image/png;base64,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"></image>
+    </view>
 </template>

@@ -1,5 +1,6 @@
 <import src="../../wxParse/wxParse.wxml"/>
 <import src="../../template/article/article"/>
+
 <view class="container" style="background:{{bodyColor}};">
   <!-- 中间层，点击，头部底部显示 -->
   <!--
@@ -12,10 +13,10 @@
       <text class='text2'>{{articleInfo.muLuInfo[0]['name']}}</text>
     </view>
     
-    <view style='display:block;width:100%;'>
+    <!--<view style='display:block;width:100%;'>
       <text class='text1'>出处：</text>
       <text class='text2'>{{articleInfo.reference?articleInfo.reference:"暂无"}}</text>
-    </view>   
+    </view>-->
   </view>
   <view class="artical-action-mid" bindtap="midaction"  bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></view>
   <!-- 主体内容 -->
@@ -96,3 +97,5 @@
         <text>不喜欢</text>
       </view>
     </view>
+
+    <template is="xuanfuSearch"></template>

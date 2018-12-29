@@ -52,7 +52,13 @@ Page({
           }
       })
   },
-
+    //跳转到搜索页面
+    toSearch: function (e) {
+        wx.navigateTo({
+            url: '/pages/search/index',
+        })
+    },
+    //查看详细信息
     xiangxi: function (e) {
         var articleID = e.currentTarget.dataset.id;
         wx.navigateTo({

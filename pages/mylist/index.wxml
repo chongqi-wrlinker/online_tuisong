@@ -11,3 +11,4 @@
     </block>
     
 </view>
+<template is="xuanfuSearch"></template>

@@ -15,9 +15,10 @@
                     </block>
                 </block>
                 <block wx:else>
-                    <template is="nullList"></template>
+                    <template is="nullList" data="{{noContent}}"></template>
                 </block>
             </swiper-item>
         </block>
     </block>
 </swiper>
+<template is="xuanfuSearch"></template>

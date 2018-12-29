@@ -6,5 +6,7 @@
     bind:changeMulu='changeMulu'
     bind:changeMuluS='changeMuluS'
     bind:xiangxi='xiangxi'
+    noContent="{{noContent}}"
+    bind:toSearch="toSearch"
 ></hengmulu>
 

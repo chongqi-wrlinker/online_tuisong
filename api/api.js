@@ -68,6 +68,26 @@ function getUserLikeOrNotList(){
     return "https://wrlinkeradmin.applinzi.com/thinkphp/index.php/Tuisong/index/getUserLikeOrNotList";
 }
 
+//获取用户的爱好设置
+function getHobbyMuLuList(){
+    return "https://wrlinkeradmin.applinzi.com/thinkphp/index.php/Tuisong/index/getHobbyMuLuList";
+}
+
+//更新用户的偏好设置
+function updateUserHoppy(){
+    return "https://wrlinkeradmin.applinzi.com/thinkphp/index.php/Tuisong/index/updateUserHoppy";
+}
+
+//获取用户搜索内容
+function search(){
+    return "https://wrlinkeradmin.applinzi.com/thinkphp/index.php/Tuisong/index/search";
+}
+
+//获取通过某种排序的文章列表
+function getArticleListBySort(){
+    return "https://wrlinkeradmin.applinzi.com/thinkphp/index.php/Tuisong/index/getArticleListBySort";
+}
+
 module.exports.getOpenID = getOpenID;
 module.exports.getRestMuluList = getRestMuluList;
 module.exports.addUserInfo = addUserInfo;
@@ -83,3 +103,7 @@ module.exports.dealShouChang = dealShouChang;
 module.exports.dealListArticle = dealListArticle;
 module.exports.getRestMuLuList1 = getRestMuLuList1;
 module.exports.getUserLikeOrNotList = getUserLikeOrNotList;
+module.exports.getHobbyMuLuList = getHobbyMuLuList;
+module.exports.updateUserHoppy = updateUserHoppy;
+module.exports.search = search;
+module.exports.getArticleListBySort = getArticleListBySort;

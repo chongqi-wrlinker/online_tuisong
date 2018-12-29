@@ -1,6 +1,8 @@
 {
     "pages": [
+        
         "pages/index/index",
+        "pages/search/index",
         "pages/xiangxi/index",
         "pages/fenlei/index",
         "pages/wode/index",
@@ -11,7 +13,8 @@
         "pages/shouchang/index",
         "pages/liebiao/index",
         "pages/myliek/index",
-        "pages/mylist/index"
+        "pages/mylist/index",
+        "pages/searchResult/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

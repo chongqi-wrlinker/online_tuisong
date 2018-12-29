@@ -64,7 +64,7 @@ Page({
 
     }
   },
- 
+  
  //收藏方法
   shoucang: function () {
         var articleInfo = this.data.articleInfo;

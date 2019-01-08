@@ -1,6 +1,8 @@
 // pages/shezhi/index.js
 var api=require("../../api/api.js");
 var util=require("../../utils/util.js");
+var common=require("../../api/common.js");
+var app=getApp();
 Page({
 
   /**
@@ -29,6 +31,7 @@ Page({
     saveConfig:function(e){
         var dianjis = this.data.dianjis;
         if (dianjis){
+            app.globalData.restMuluListState=false;
             wx.showLoading({
                 title: '正在保存数据...',
             })
@@ -45,11 +48,14 @@ Page({
             var fianlIdStr = userNotList.join("-");
             //保存用户不喜欢的目录到数据库中
             var userID = wx.getStorageSync("userID");
+            var that=this;
             wx.request({
                 url: api.updateUserHoppy(),
                 data: { userID: userID, idArr: fianlIdStr},
                 success:function(res){
                     wx.hideLoading();
+                    //更新分类目录
+                    that.updateFinalMulu();
                     wx.showToast({
                         title: '数据更新成功',
                         icon: "success",
@@ -64,7 +70,19 @@ Page({
             })
         }
     },
-
+updateFinalMulu:function(){
+    var userID = wx.getStorageSync("userID");
+    var that=this;
+    wx.request({
+        url: api.getRestMuLuList1(),
+        data: { userID: userID },
+        success: function (res) {
+            var fianlArr = common.dealRestMuluList(res.data);
+            app.globalData.restMuluList = fianlArr;
+            app.globalData.restMuluListState = true;
+        }
+    })
+},
   /**
    * 生命周期函数--监听页面加载
    */

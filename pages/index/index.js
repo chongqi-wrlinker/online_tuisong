@@ -1,6 +1,7 @@
 // pages/newindex/newindex.js
 var api=require("../../api/api.js");
 var common=require("../../api/common.js");
+var app=getApp();
 Page({
 
   /**
@@ -8,9 +9,10 @@ Page({
    */
   data: {
     movies: [
-      { url: '/image/toutu.gif ' },
+        { url: '/image/toutu.gif ' },
         { url: '/image/toutu.gif' }
     ],
+    
     articleList:[],//首页推荐内容列表
     clickList:[],//点击排序文章列表
     timeList:[],//时间排序文章列表
@@ -103,22 +105,24 @@ Page({
   
  
   fenlei: function (e) {
-      //获取用户的设置偏好后的目录列表
-     var userID=wx.getStorageSync("userID");
-     var that=this;
-     wx.request({
-         url: api.getRestMuLuList1(),
-         data: { userID: userID },
-         success:function(res){
-            var fianlArr = common.dealRestMuluList(res.data);
-            that.setData({
-                restMuluList: fianlArr,
-                tuijian: false,
-                fenlei: true,
-                wode: false,
-            });
-         }
-     })
+    var restMuluListState = app.globalData.restMuluListState;
+     
+    if (restMuluListState){
+        var restMuluList = app.globalData.restMuluList;
+        console.log(restMuluList);
+        this.setData({
+            restMuluList: restMuluList,
+            tuijian: false,
+            fenlei: true,
+            wode: false,
+        });
+    }else{
+        wx.showToast({
+            title: '正在加载目录数据...',
+            icon:"none"
+        })
+    }
+    
   },
   wode: function (e) {
     //获取用户可能喜欢的文章
@@ -145,7 +149,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (cb) {
-     
+      
+      //获取用户的设置偏好后的目录列表
+      
   },
    
   getIndexDataInfo:function(e){
@@ -185,6 +191,9 @@ Page({
       //获取用户的
       wx.showNavigationBarLoading();
       this.getIndexDataInfo();
+      this.setData({
+          restMuluList: app.globalData.restMuluList,
+      });
   },
 
   /**

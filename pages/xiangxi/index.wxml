@@ -1,12 +1,11 @@
-<import src="../../wxParse/wxParse.wxml"/>
 <import src="../../template/article/article"/>
-
-<view class="container" style="background:{{bodyColor}};">
+<import src="../../template/xuanfu/xuanfu"/>
+<view class="container" style="background:{{bodyColor}};margin-bottom:120rpx">
   <!-- 中间层，点击，头部底部显示 -->
   <!--
     <block wx:if="{{articleInfo.title}}"><view class='topbiaoti'>{{articleInfo.title}}</view></block>
   -->
-  
+  <template is="share"></template>
   <view class='ziliao'>
     <view>
       <text class='text1'>所属目录：</text>
@@ -22,7 +21,7 @@
   <!-- 主体内容 -->
   <view class='bgbg'></view>
   <scroll-view  scroll-top="{{scroll_top}}" class="m-read-content" style="font-size:{{initFontSize}}px;" bindscroll="scrollContain" bindscrolltolower="bindscrolltolower" >
-        <block wx:if="{{articleInfo.muLuInfo[0]['pid']==4}}">
+        <block wx:if="{{articleInfo.muLuInfo[0]['pid']==90}}">
             <template is="geyan" data="{{articleInfo}}"></template>
         </block>
         <block wx:if="{{articleInfo.muLuInfo[0]['pid']==21}}">
@@ -35,6 +34,8 @@
   </scroll-view>
 </view>
   <!-- 底部 -->
+  <template is="arrowXuanFu" data="{{nav}}"></template>
+
   <view class="bottom-nav bottom_nav" style="display:{{nav}}">
     <view class="item menu-button" bindtap='shoucang'>
       <view class="item-warp" wx:if="{{articleInfo.shouChangState}}">
@@ -78,6 +79,7 @@
         <view class="icon-text">不喜欢({{articleInfo.dontLikeCount}})</view>
       </view>
     </view>
+    
   </view>
   <view class="{{tsk?'zhezhao':'hide'}}"></view>
   <view class="{{tsk?'tishi':'hide'}}">
@@ -98,4 +100,3 @@
       </view>
     </view>
 
-    <template is="xuanfuSearch"></template>

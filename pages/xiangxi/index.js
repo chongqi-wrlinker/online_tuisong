@@ -7,15 +7,17 @@ var time = 0;// 时间记录，用于滑动时且时间小于1s则执行左右�
 var interval = "";// 记录/清理时间记录 
 Page({
   data: {
-      articleInfo:[],
+    articleInfo:[],
+    articlePreArr:[],
+    articleNextArr: [],
     scroll_top: 0,
     Text: "",
     initFontSize: '14',
     bodyColor: '#e9dfc7',
     daynight: false,
-    zitiaction:false,
+    zitiaction:true,
     zj: 'none',
-    nav: 'none',
+    nav: 'block',
     shoucang:false,
     sc:0,
     like:0,
@@ -24,32 +26,50 @@ Page({
     tsks: false,
   },
   onLoad: function (options) {
-      var that=this;
-      //var articleID=9461;
+      wx.showLoading({
+          title: '正在加载...',
+      })
+      //var articleID=1;
       var articleID = options.articleID;
-      var userID=wx.getStorageSync("userID");
+      
+      this.initData(articleID);
+  },
+  onShareAppMessage:function(e){
+      var articleID = this.data.articleInfo.id;
+      return {
+          title: '懂你推送',
+          path: '/pages/xiangxi/index?articleID=' + articleID,
+      }
+  },
+  //初始化页面数据
+  initData:function(articleID){
+      var that = this;
+      var userID = wx.getStorageSync("userID");
       wx.request({
           url: api.getOneArticleInfo(),
-          data: { articleID: articleID, userID: userID},
-          success:function(res){
-              console.log(res);
-              if (res.data[0]['muLuInfo'][0]['pid']==21){
+          data: { articleID: articleID, userID: userID },
+          success: function (res) {
+              if (res.data[0]['muLuInfo'][0]['pid'] == 21) {
                   //该类型是诗词模板，需要断句
-                  res.data[0]['content']=util.duanJu(res.data[0]['content']);
+                  res.data[0]['content'] = util.duanJu(res.data[0]['content']);
                   res.data[0]['des'] = util.desDuanJu(res.data[0]['des']);
-                  
               }
-
               that.setData({
-                  articleInfo:res.data[0]
+                  articleInfo: res.data[0]
               });
+              wx.hideLoading();
           }
       })
-    
-    
   },
   
-  
+  //分享的方法
+    showShare:function(e){
+        wx.showShareMenu({
+            withShareTicket: true
+        })
+    },
+    
+
   //点击中间区域显示底部导航
   midaction: function () {
     if (this.data.nav == 'none') {
@@ -171,23 +191,34 @@ Page({
     })
   },
   //上一页下一页
-  /*lastPage: function () {
-    var that=this;
-    that.setData({
-      Text: '和婚礼相比，顾千城更秦云楚见顾国公久久不给准话，再次威胁道：“顾公国，新娘换不换？本世子还等着新娘上花轿，至于顾千城这残疾，你们爱嫁给谁就嫁让她嫁给谁，总之本世子不要。”关心自己受伤的脚，她现在只希望这场闹剧早点结束，不然她的脚撑不住。顾千城冷眼扫过观礼的客人，这些人纷纷别过脸，一脸尴尬。一伙看看秦云楚、一伙看看顾千城，无人开口。喜堂安静得吓人，似乎连针落地的声道都能听清这个时候，全福夫人收到示意，上前一步打破寂静：“顾国公，这身有残疾的女子确实不能嫁入皇家，顾家执意要大小姐嫁过去，只怕亲家结不成，反倒结成仇家了。”“荒唐，这哪里荒唐了，难道要本世子吃这个哑巴亏，把一个残废娶回家？”秦云楚一脸骄横，残疾二字越说越顺口，看顾千城的眼神，也是一脸嫌恶。',
-      scroll_top: 0
-    })
+  changeValue:function(e){
+      wx.showLoading({
+          title: '正在加载...',
+      })
+      var flag = e.currentTarget.dataset.id;
+      var currentArticleID=this.data.articleInfo.id;
+      var muluID = this.data.articleInfo.muluid;
+      var userID=wx.getStorageSync("userID");
+      var that=this;
+      wx.request({
+          url: api.getChangeInfo(),
+          data:{articleID:currentArticleID,muluID:muluID,userID:userID,flag:flag},
+          success:function(e){
+              var articleID = parseInt(e.data.nextID);
+              console.log(articleID);
+              if (articleID<1){
+                  wx.hideLoading();
+                  wx.showToast({
+                      title: '对不起，已经没有了',
+                      icon:"none",
+                      duration:1000
+                  })
+              }else{
+                  that.initData(articleID);
+              }
+          }
+      })
   },
-  nextPage: function () {
-    var that=this;
-    that.setData({
-      Text: '这一对翁婿，直接越过顾千城，也不管顾千城的意愿，三言两语就同意了换新娘达成所愿，秦云楚满意的停下脚步，笑容满面的转身：“国公爷早同意不就没事，至于我父王和母妃那边，国公爷不必担心，本世子自会解释。”一事。和婚礼相比，顾千城更秦云楚见顾国公久久不给准话，再次威胁道：“顾公国，新娘换不换？本世子还等着新娘上花轿，至于顾千城这残疾，你们爱嫁给谁就嫁让她嫁给谁，总之本世子不要。”关心自己受伤的脚，她现在只希望这场闹剧早点结束，不然她的脚撑不住。顾千城冷眼扫过观礼的客人，这些人纷纷别过脸，一脸尴尬。一伙看看秦云楚、一伙看看顾千城，无人开口。喜堂安静得吓人，似乎连针落地的声道都能听清这个时候，全福夫人收到示意，上前一步打破寂静：“顾国公，这身有残疾的女子确实不能嫁入皇家，顾家执意要大小姐嫁过去，只怕亲家结不成，反倒结成仇家了。”“荒唐，这哪里荒唐了，难道要本世子吃这个哑巴亏，把一个残废娶回家？”秦云楚一脸骄横，残疾二字越说越顺口，看顾千城的眼神，也是一脸嫌恶。',
-      scroll_top: 0
-    })
-    console.log(that.data.Text);
-    let winPage = this;
-    wxparse.wxParse('Text', 'html', that.data.Text, this, 0);
-  },*/
   // 触摸开始事件 
   touchStart: function (e) {
     touchDot = e.touches[0].pageX; // 获取触摸时的原点 

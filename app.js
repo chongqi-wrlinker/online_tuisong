@@ -1,5 +1,6 @@
 //app.js
 var api=require("api/api.js");
+var common=require("api/common.js");
 App({
   onLaunch: function () {
       
@@ -14,6 +15,16 @@ App({
                     data: { code: res.code },
                     success: function (res1) {
                         wx.setStorageSync("userID", res1.data.msg);
+                        var userID = wx.getStorageSync("userID");
+                        wx.request({
+                            url: api.getRestMuLuList1(),
+                            data: { userID: userID },
+                            success: function (res) {
+                                var fianlArr = common.dealRestMuluList(res.data);
+                                that.globalData.restMuluList = fianlArr;
+                                that.globalData.restMuluListState=true;
+                            }
+                        })
                     }
               })
           }
@@ -38,6 +49,8 @@ App({
       
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    restMuluList:[],
+    restMuluListState:false,
   }
 })

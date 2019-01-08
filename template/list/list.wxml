@@ -2,7 +2,7 @@
 <template name="gengDuoList">
     <view class='lieb'>
         <!--<image src='/image/shici.png' class='tup'></image>-->
-        <view class='titles' bindtap='xiangxi' data-id="{{item.id}}">{{item.title?item.title:item.content}}</view>
+        <view class='titles text-overflow' bindtap='xiangxi' data-id="{{item.id}}">{{item.title?item.title:item.content}}</view>
         <view class='guanjianci'>
             <text bindtap='click'>{{item.keywordlist?item.keywordlist:"暂无"}}</text>
         </view>
@@ -27,6 +27,17 @@
                 <text>{{item.likeCount}}</text>
             </view>
         </view>
+    </view>
+</template>
+
+<template name="fenleiList">
+    <view class='lieb'>
+        <!--<image src='/image/shici.png' class='tup'></image>-->
+        <view class='titles text-overflow'  data-id="{{item.id}}">{{children.name}}</view>
+        <view class='guanjianci'>
+            <text bindtap='click'>{{children.name}}</text>
+        </view>
+        
     </view>
 </template>
 

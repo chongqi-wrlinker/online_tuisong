@@ -1,0 +1,48 @@
+<template name="fenlei1">
+    <block wx:for="{{restMuluList}}"  wx:key="ky">
+        <block wx:for="{{item.children}}" wx:for-item="children"  wx:key="ky1">
+            <view class='lieb' bindtap='click' data-muluid="{{children.id}}" data-name="{{children.name}}">
+                <image src="{{children.fengmianUrl=='no'?'/image/shici.png':children.fengmianUrl}}" class='tup'></image>
+                <view style='float:left;width:60%'>
+                    <view class='titles text-overflow' >{{item.name}}</view>
+                        <view class='guanjianci'>
+                            <text >{{children.name}}</text>
+                        </view> 
+                        <view class='liulan' style='width:100%'>
+                            <view>
+                                <image src='/image/index/collection.png'></image>
+                                <text>总收录:{{children.totalCount}}</text>
+                            </view>
+                            <view>
+                                <image src='/image/index/eye.png' style='width:50rpx;'></image>
+                                <text>总热度:{{children.totalClick}}</text>
+                            </view>
+                            
+                        </view>
+                </view>
+                
+            </view>
+        </block>
+    </block>
+</template>
+
+
+<template name="fenlei2">
+    <view class='free-panel-title'>
+        <view class='free-WaterfallFlow'>
+            <block wx:for="{{restMuluList}}" wx:for-item="rm" wx:key="ky">
+                    
+                    <view class='flex-wrap' style='background-color:{{rm.color}};color:white;'>
+                        <view class='title'>{{rm.name}}</view>
+                    </view>
+                    <block wx:for="{{rm.children}}" wx:key="ky1">
+                        <view class='flex-wrap' style='background-color:{{rm.color}};color:white;'>
+                            <image class='widthFix'   src="{{item.fengmianUrl=='no'?'/image/shici.png':item.fengmianUrl}}" style='height:100px'></image>
+                            <view class='title'>{{item.name}}</view>
+                        </view>
+                    </block>
+            </block>
+            
+        </view>
+    </view>
+</template>

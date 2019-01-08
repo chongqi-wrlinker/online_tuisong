@@ -1,0 +1,16 @@
+<template name="arrowXuanFu">
+    <view class="xuanfu" style='display:{{nav}}'>
+        <view class='leftArrow' bindtap='changeValue' data-id="1">
+            <image src="/template/xuanfu/leftArrow.png"></image>
+        </view>
+        <view class='rightArrow' bindtap='changeValue' data-id="2">
+            <image src="/template/xuanfu/rightArrow.png"></image>
+        </view>
+    </view>
+</template>
+
+<template name="share">
+    <view class='share'>
+        <button open-type='share' class='shareBtn'></button>
+    </view>
+</template>

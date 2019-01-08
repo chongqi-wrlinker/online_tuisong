@@ -1,5 +1,6 @@
 <import src="../../template/list/list.wxml"/>
 <import src="../../template/my/my.wxml"/>
+<import src="../../template/fenlei/index.wxml"/><!--分类模板-->
 <view class="body">
   <view class='top'>
     <view class="{{tuijian?'choose':''}}" bindtap='tuijian'>推荐</view>
@@ -34,17 +35,11 @@
   </view>
   <!--分类-->
   <view class="{{fenlei?'show':'hidden'}}">
-    <view class='bankuai' wx:for="{{restMuluList}}" wx:key="{{key2}}">
-      <view class='left'>
-        <text>{{item.name}}</text>
-      </view>
-      <view class='right'>
-        <text wx:for="{{item.children}}" wx:key="{{key3}}" bindtap='click' data-muluid="{{item.id}}" data-name="{{item.name}}">{{item.name}}</text>
-      </view>
-    </view>
+        <template is="fenlei2" data="{{restMuluList}}"></template>
   </view>
   <!--我的-->
   <view class="{{wode?'show':'hidden'}}">
+
       <template is="my" data="{{myData}}"></template>
   </view>
   <template is="xuanfuSearch"></template>

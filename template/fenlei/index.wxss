@@ -1,0 +1,23 @@
+.free-WaterfallFlow{
+  
+  width: 94%;
+  column-count:2;/*column-count 属性规定元素应该被分隔的列数：*/
+  column-gap: 20rpx;
+  margin:0 auto;
+  margin-top:60px;
+  
+
+}
+.free-WaterfallFlow .flex-wrap{
+  display: inline-block;
+  width:100%;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+
+  text-align: center;
+}
+
+.flex-wrap image{
+  width:100%;
+  margin:0 auto;
+}

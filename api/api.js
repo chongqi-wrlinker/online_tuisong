@@ -88,6 +88,11 @@ function getArticleListBySort(){
     return "https://wrlinkeradmin.applinzi.com/thinkphp/index.php/Tuisong/index/getArticleListBySort";
 }
 
+//获取某个单独文章的上一页或者下一页的数据
+function getChangeInfo(){
+    return "https://wrlinkeradmin.applinzi.com/thinkphp/index.php/Tuisong/index/getChangeInfo";
+}
+
 module.exports.getOpenID = getOpenID;
 module.exports.getRestMuluList = getRestMuluList;
 module.exports.addUserInfo = addUserInfo;
@@ -107,3 +112,4 @@ module.exports.getHobbyMuLuList = getHobbyMuLuList;
 module.exports.updateUserHoppy = updateUserHoppy;
 module.exports.search = search;
 module.exports.getArticleListBySort = getArticleListBySort;
+module.exports.getChangeInfo = getChangeInfo;

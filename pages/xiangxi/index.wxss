@@ -1,4 +1,4 @@
-
+@import "../../template/xuanfu/xuanfu.wxss";
 .log-list {
   display: flex;
   flex-direction: column;
@@ -225,7 +225,7 @@ font-weight:bold;
 				position: fixed;
 				bottom: 0px;
 				height: 70px;
-				background: #000;
+				background: #385e4a;
 				width: 100%;
 				opacity: 1;
 				z-index: 10004;
